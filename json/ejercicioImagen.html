@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>EJercicio JSON</title>
+    </head>
+    <body >
+        <h1>Ejemplo JSON</h1>
+        <button onclick="mostrarImagen()">Mostrar imagen</button>
+        <button onclick="ocultarImagen()">Ocultar imagen</button>
+        <hr>
+        <img src="BIT.jpg" alt="Imagen BIT" id="imagen" onmouseover="mostrarMensaje()" onmouseout="ocultarMensaje()">
+        <p id="mensaje"></p>
+        <script>
+            function mostrarImagen() {
+                const imagenElemento = document.getElementById("imagen");
+                imagenElemento.style.display = "block";
+            }
+        </script>
+        <script>
+            function ocultarImagen() {
+                const imagenElemento = document.getElementById("imagen");
+                imagenElemento.style.display = "none";
+            }
+        </script>
+        <script>
+            function mostrarMensaje() {
+                const mensajeElemento = document.getElementById("mensaje");
+                mensajeElemento.textContent = "¡B1T es god!";
+            }
+        </script>
+        <script>
+            function ocultarMensaje() {
+                const mensajeElemento = document.getElementById("mensaje");
+                mensajeElemento.textContent = "";
+            }
+        </script>
+    </body>
