@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio JSON</title>
+</head>
+<body>
+    <form id="formulario" onsubmit="event.preventDefault(); guardarDatos();">
+        <h1>Formulario de Ejercicio JSON</h1>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombreForms" required><br><br>
+
+        <label for="color">Color:</label>
+        <select id="color" name="colorForms" required>
+            <option value="">Selecciona un color</option>
+            <option value="red">Rojo</option>
+            <option value="blue">Azul</option>
+            <option value="green">Verde</option>
+            <option value="yellow">Amarillo</option>
+        </select><br><br>
+
+        <button type="submit">Enviar</button>
+        
+        <div id="res"></div>
+        <script>
+            function guardarDatos() {
+                const nombre = document.getElementById("nombre").value;
+                const color = document.getElementById("color").value;
+
+                localStorage.setItem("datos", JSON.stringify({nombre, color}));
+
+                const mensajeElemento = document.getElementById("res");
+                mensajeElemento.textContent = localStorage.getItem("datos");
+                mensajeElemento.style.color = JSON.parse(localStorage.getItem("datos")).color;
+            }
+        </script>
+    </form>
+</body>
