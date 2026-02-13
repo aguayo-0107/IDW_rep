@@ -1,0 +1,10 @@
+{
+    "alumno": {
+        "nombre": "Mariana",
+        "intereses": [
+            "programación", 
+            "diseño gráfico", 
+            "fotografía"
+        ]
+    }
+}
