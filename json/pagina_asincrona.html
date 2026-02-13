@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Página Asíncrona</title>
+    </head>
+    <body>
+        <script>
+            fetch("salon.json")
+            .then((respuesta) => {
+                // primero imprimimos la respuesta sin procesar
+                console.log(respuesta);
+
+                // obetenemos los datos en formato JSON
+                return respuesta.json();
+            })
+            .then((datos) => {
+                // ahora imprimimos los datos procesados
+                console.log(datos);
+            })
+            .catch((error) => {
+                console.error("Ocurrio un error al recoger los datos:", error);
+            });
+        </script>
+    </body>
+</html>
