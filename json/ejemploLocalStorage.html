@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Ejemplo Local Storage</title>
+    </head>
+    <body >
+        <h1>Ejemplo Local Storage</h1>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre">
+    </br>
+    <p id="mensaje"></p>
+    </br>   
+        <button onclick="guardarDatos()">Guardar datos</button>
+
+        <button onclick="mostrarMensaje()">Mostar mensaje</button>
+        <script>
+            function guardarDatos() {
+                const nombreInput = document.getElementById("nombre");
+                const nombreIn = nombreInput.value;
+                localStorage.setItem("nombre", nombreIn);
+            }
+            function mostrarMensaje() {
+                const nombre = localStorage.getItem("nombre");
+                const mensajeElemento = document.getElementById("mensaje");
+                mensajeElemento.textContent = `Hola ${nombre}!`;
+            }
+        </script>
+    </body>
