@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selección Artistas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <style>
+        body {
+          margin: 3rem 3rem  
+        }
+    </style>
+</head>
+<body>
+    <h1 class="h1">Tarea API Spotify</h1>
+    <br>
+    <form>
+        <div class="mb-3">
+            <label for="inputToken" class="form-label">Token</label>
+            <input type="text" class="form-control" id="inputToken">
+        </div>
+        <button type="submit" class="btn btn-primary" onclick="guardarToken()">Guardar Token</button>
+        <br>
+        <br>
+        <select id="TrackSelect" class="form-select" aria-label="Track Select" onchange="cambio()">
+            <option selected>Selecciona una cancion</option>
+            <option value="1">Deja Vu</option>
+            <option value="2">Me Rehúso</option>
+            <option value="3">Baile Inolvidable</option>
+            <option value="4">Stateside + Zara Larsson</option>
+        </select>
+        <br>
+    </form>
+    <p id="Informacion"> </p>
+    <button type="button" class="btn btn-primary" onclick="limpiarInfo()">Limpiar Página</button>
+    <script>
+        function guardarToken() {
+            input = document.getElementById("inputToken")
+            sessionStorage.setItem("TOKEN", input.value);
+        }
+        function cambio() {
+            sel = document.getElementById("TrackSelect")
+            seleccion = true;
+            switch(sel.value) {
+                case "1": 
+                    track_id = "6HU7h9RYOaPRFeh0R3UeAr"
+                    break;
+                case "2":
+                    track_id = "6De0lHrwBfPfrhorm9q1Xl"
+                    break;
+                case "3": 
+                    track_id = "2lTm559tuIvatlT1u0JYG2"
+                    break;
+                case "4":
+                    track_id = "1DwscornXpj8fmOmYVlqZt"
+                    break;
+                default:
+                    seleccion = false;
+                    limpiarInfo();
+                    break;
+            }
+            if (seleccion) {
+                obtenerTrack(track_id)   
+            } 
+        }
+        function formatData(track) {
+            let resultado ="<div> <h2>" + track.name + "</h2>";
+            resultado = resultado + "<img" + " src= '" + track.album.images[0].url + "' alt='Imagen del album' heigth='200px' width='200px'> </img>";
+            resultado = resultado + "</br></br>";
+            resultado = resultado + "<h3>Información</h3> <ul>";
+            resultado = resultado + "<li>Nombre del album: " + track.album.name + "</li>";
+            resultado = resultado + "<li>Tipo de album: " + track.album.album_type + "</li>";
+            resultado = resultado + "<li>Link: <a href='" + track.album.external_urls["spotify"] + "' target='_blank' rel='noopener noreferrer'>"+ track.album.name + "</a></li>";
+            resultado = resultado + "</ul> <h3>Artistas:</h3> <ul> ";
+            for (i=0; i < track.artists.length; i++)
+                resultado = resultado + "<li>" + track.artists[i]["name"] + ": " + "<a href='" + track.artists[i]["external_urls"]["spotify"] + "' target='_blank' rel='noopener noreferrer'>Link Spotify</a></li>";
+            resultado = resultado + "</ul>";
+            return resultado + "</div>";
+        }
+        function obtenerTrack(track_id) {
+            token = sessionStorage.getItem("TOKEN")
+            url = "https://api.spotify.com/v1/tracks/"+ track_id
+
+            const parametros = {
+            method: "GET",
+            headers: {
+                    Authorization:
+                    "Bearer " + token,
+                },
+            };
+            console.log(parametros)
+            fetch(url,
+                  parametros,
+            ).then(respuesta => respuesta.json())
+            .then(datos => {
+                const contenedorInformacion = document.getElementById("Informacion");
+                infoFormateada = formatData(datos) 
+
+                contenedorInformacion.innerHTML = infoFormateada;
+            })
+            .catch((error) => {
+                console.error("Error al obtener canción: ", error);
+                alerta = "<div class='alert alert-danger' role='alert'> Hubo un error al conseguir la canción! </div>";
+                const contenedorInformacion = document.getElementById("Informacion");
+                contenedorInformacion.innerHTML = alerta;
+             })
+        }
+        function limpiarInfo() {
+            const contenedorInformacion = document.getElementById("Informacion");
+            contenedorInformacion.innerHTML = "";
+        }
+        
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>
