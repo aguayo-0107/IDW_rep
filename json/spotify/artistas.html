@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artistas Spotify</title>
+</head>
+<body>
+    <div id="Informacion"></div>
+    </br></br>
+    <div id="artista"></div>
+    <script>
+        function transformarArtista(artista) {
+            let resultado ="<div> <h2>" + artista.name + "</h2>";
+            resultado = resultado + "<img" + " src= '" + artista.images[0].url + "' alt='Imagen del artista' heigth='200px' width='200px'> </img>";
+            resultado = resultado + "</br></br>";
+            //resultado = resultado + "<p>Cantidad de seguidores: " + artista.followers.total + "</p>";  //por alguna razon a mi no me llega?
+            resultado = resultado + "<a href='" + artista.uri + "'>Link a Spotify</a>";
+            return resultado + "</div>";
+        }
+        function obtenerArtista() {
+            const parametros = {
+            method: "GET",
+            headers: {
+                    Authorization:
+                    "Bearer BQChET7uYigGveOCaNDGiP9pZR8ZfAGZkenOLAJwZaBK3b5PxTH3F1iBy6O5LPq9n36PAIYzYcN-OsFh8s33_RQZ5k90N8Rw6TJo_AyJNuCVFoSxrtcy5oEfWJJ-oHgykx3LaTojFLE",
+                },
+            };
+
+            fetch(
+                "https://api.spotify.com/v1/artists/0TnOYISbd1XYRBk9myaseg",
+                parametros,
+            ).then(respuesta => respuesta.json())
+            .then(datos => {
+                const contenedorInformacion = document.getElementById("Informacion");
+                contenedorInformacion.textContent = JSON.stringify(datos);
+
+                const contenedorArtista = document.getElementById("artista");
+                contenedorArtista.innerHTML = transformarArtista(datos);
+            })
+            .catch((error) => 
+            console.error("Error al obtener el artista: ", error));
+        }
+        obtenerArtista();
+    </script>
+    
+</body>
+</html>

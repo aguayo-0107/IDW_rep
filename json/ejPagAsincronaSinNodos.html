@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ejercicio de Página Asíncrona</title>
+    </head>
+    <body>
+        <div id="contenido"></div>
+
+        <script>
+            function transformarProfesor(profesor) {
+                let resultado ="<div> <h2>" + profesor.nombre + "</h2>";
+                resultado = resultado + "<ul>";
+                for (let i = 0 ; i < profesor.intereses_profesionales.length; i++) {
+                    resultado += "<li>" + profesor.intereses_profesionales[i] + "</li>";
+                }
+                return resultado + "</div>";
+            }
+            fetch("salon.json")
+            .then((respuesta) => {
+                
+                return respuesta.json();
+            })
+            .then((datos) => {
+                console.log(datos);
+                const contenedor = document.getElementById("contenido");
+                contenedor.innerHTML = transformarProfesor(datos.profesor);
+
+            })
+            .catch((error) => {
+                console.error("Ocurrio un error al recoger los datos:", error);
+            });
+        </script>
+    </body>

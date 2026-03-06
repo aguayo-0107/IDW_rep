@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <title>NASA API</title>
+</head>
+<body>
+    <div id="JSON"></div></br></br>
+    <div class="card" style="width: 18rem;" id="contenedor">
+        <img src="BIT.jpg" class="card-img-top" alt="" id="foto">
+        <div class="card-body">
+            <h5 class="card-title" id="Card_Title">Card title</h5>
+            <p class="card-text" id="Card_Text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+            <a href="https://www.nasa.gov/" class="btn btn-primary" id="boton">NASA</a>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script>
+        function obtenerFoto() {
+
+            fetch(
+                "https://api.nasa.gov/planetary/apod?api_key=bkeMd6z3Z75yyaN5OXPSQmrQq4ZBZNFGy5YjNf6k&date=2004-07-01",
+            ).then(respuesta => respuesta.json())
+            .then(datos => {
+                const contenedorInformacion = document.getElementById("JSON");
+                //contenedorInformacion.textContent = JSON.stringify(datos);
+
+                const contenedorFoto = document.getElementById("foto");
+                contenedorFoto.src = datos.url;
+
+                const contenedorTitle = document.getElementById("Card_Title");
+                contenedorTitle.textContent = datos.title;
+
+                const contenedorText = document.getElementById("Card_Text");
+                contenedorText.textContent = datos.date;
+                
+            })
+            .catch((error) => 
+            console.error("Error al obtener la foto: ", error));
+        }
+        obtenerFoto();
+    </script>
+    
+</body>
+</html>
