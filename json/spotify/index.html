@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ejemplo de API</title>
+    </head>
+    <body>
+        <h1>Llamada a Spotify</h1>
+
+        <form 
+            method="POST"
+            action="https://accounts.spotify.com/api/token"
+            enctype="application/x-www-form-urlencoded">
+
+            <input hidden name="grant_type" value="client_credentials">
+            <input name="client_id" placeholder="Ingresa tu client id"> </br></br>
+            <input name="client_secret" placeholder="Ingresa tu Secret" /> </br></br>
+            <button type="submit">Solicitar Token de Acceso</button>
+        </form>
+    </body>
