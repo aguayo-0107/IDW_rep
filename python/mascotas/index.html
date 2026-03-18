@@ -9,7 +9,7 @@
 <body>
     <h1>Ejercicio Mascotas</h1>
     <br/>
-    <p class="d-inline-flex gap-1">
+    <p class="d-inline-flex gap-1" onclick="getSolicitudes()">
         <a class="btn btn-success" data-bs-toggle="collapse" href="#Solicitudes" role="button" aria-expanded="false" aria-controls="collapseExample">
             Solicitudes
         </a>
@@ -43,7 +43,20 @@
             </form>
         </div>
     </div>
-    
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script>
+        const url_base = "https://idw-rep.onrender.com"
+
+        function getSolicitudes() {
+            fetch(`${ulr_base}/algo`)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                info = document.getElementById("info_solicitudes")
+                info
+            })
+            .catch((error) => console.error("Error: ", error))
+        }
+    </script>
 </body>
 </html>
