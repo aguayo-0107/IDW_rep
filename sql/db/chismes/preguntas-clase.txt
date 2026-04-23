@@ -18,7 +18,7 @@ SELECT quien_dijo, sobre_quien, chisme FROM chismes WHERE nivel_gravedad >= 4
 SELECT sobre_quien, chisme, quien_dijo FROM chismes WHERE sobre_quien = 'Ana'
 
 7. Chismes ocurridos entre dos fechas
-SELECT chisme, fecha FROM chismes WHERE fecha BETWEEN '2024-01-01' AND '2024-09-31'
+SELECT chisme, fecha FROM chismes WHERE fecha BETWEEN '2024-01-01' AND '2024-09-30'
 
 8. Cuántos chismes se dijeron por año
 SELECT strftime('%Y', fecha) AS anio, COUNT(*) as total_chismes
@@ -35,7 +35,6 @@ GROUP BY strftime('%Y', fecha)
 SELECT strftime('%Y', fecha) AS anio, 
 strftime('%m', fecha) AS mes, COUNT(*) as todos_chismes
 FROM chismes
-WHERE strftime('%m', fecha) < '03'
 GROUP BY strftime('%Y', fecha), strftime('%m', fecha) 
 
 11. Años donde se dijeron más de 12 chismes
@@ -45,10 +44,7 @@ GROUP BY strftime('%Y', fecha)
 HAVING total_chismes > 12
 
 12. Suma total de dinero pagado por silencio
-SELECT strftime('%m', fecha) as anio, SUM(monto_silencio) as total_pagado
-FROM chismes
-GROUP BY anio
-HAVING total_pagado > 900
+SELECT SUM(monto_silencio) AS suma_total_silencio FROM chismes;
 
 13. Promedio del monto de silencio
 SELECT AVG(monto_silencio) AS promedio_monto_silencio FROM chismes
@@ -81,7 +77,7 @@ WHERE nivel_gravedad BETWEEN 2 AND 4
 
 19. Chismes de la categoría trabajo
 SELECT chisme, categoria
-FROM categoria
+FROM chismes
 WHERE categoria = 'Trabajo';
 
 20. Chismes contados por lugar
