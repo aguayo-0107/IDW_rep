@@ -1,21 +1,19 @@
 import Perfil from "./Perfil";
 import PerfilConParametros from "./PerfilConParametros";
+import Alerta from "./Alerta";
+import PantallaConBoton from "./estados-react/PantallaConBoton";
 
 export const Galeria = () => {
+  const [contador, setContador] = useState(0);
+
   return (
     <>
-      <Perfil />
-      <Perfil />
-
-      <PerfilConParametros
-        url="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Charles_Darwin_by_Julia_Margaret_Cameron%2C_c._1868.jpg/330px-Charles_Darwin_by_Julia_Margaret_Cameron%2C_c._1868.jpg"
-        textoAlternativo="Charles Darwin"
-      />
-
-      <PerfilConParametros
-        url="https://pymstatic.com/29788/conversions/jean-baptiste-lamarck-wide.jpg"
-        textoAlternativo="Jean-Baptiste Lamarck"
-      />
+      <PantallaConBoton />
+      <br/><br/>
+      <Alerta texto={"OK"} tipo="ok"/>
+      <Alerta texto={"Advertencia"} tipo="advertencia"/>
+      <Alerta texto={"Error"} tipo="error"/>
+      <Alerta texto={"Default"} tipo="default"/>
     </>
   );
 };
