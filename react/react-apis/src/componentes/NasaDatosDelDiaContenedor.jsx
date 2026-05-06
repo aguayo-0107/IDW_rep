@@ -41,18 +41,23 @@ export function NasaDatosDelDiaContenedor() {
     );
   }
 
+  const estilos = ["default", "anime", "vintage", "disney", "minimalista", "neon"];
+
   return (
     <div className="container py-5">
-      <div className="row justify-content-center">
-        <div className="col-12 col-lg-8 col-xxl-7">
-          <RecursoDelDia
-            fecha={datosDelDia.fecha}
-            explicacion={datosDelDia.explicacion}
-            tipoContenido={datosDelDia.tipoContenido}
-            titulo={datosDelDia.titulo}
-            url={datosDelDia.url}
-          />
-        </div>
+      <div className="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
+        {estilos.map((estilo) => (
+          <div className="col" key={estilo}>
+            <RecursoDelDia
+              fecha={datosDelDia.fecha}
+              explicacion={datosDelDia.explicacion}
+              tipoContenido={datosDelDia.tipoContenido}
+              titulo={datosDelDia.titulo}
+              url={datosDelDia.url}
+              estilo={estilo}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );
