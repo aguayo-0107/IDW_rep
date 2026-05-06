@@ -25,16 +25,35 @@ export function NasaDatosDelDiaContenedor() {
   }, []);
 
   if (datosDelDia === null) {
-    return <p>Cargando...</p>;
+    return (
+      <div className="container py-5">
+        <div className="row justify-content-center">
+          <div className="col-12 col-lg-8 col-xxl-7">
+            <div className="card border-0 shadow-sm">
+              <div className="card-body text-center py-5">
+                <div className="spinner-border text-primary mb-3" role="status" />
+                <p className="mb-0 fw-medium">Cargando la tarjeta del día...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <RecursoDelDia
-      fecha={datosDelDia.fecha}
-      explicacion={datosDelDia.explicacion}
-      tipoContenido={datosDelDia.tipoContenido}
-      titulo={datosDelDia.titulo}
-      url={datosDelDia.url}
-    />
+    <div className="container py-5">
+      <div className="row justify-content-center">
+        <div className="col-12 col-lg-8 col-xxl-7">
+          <RecursoDelDia
+            fecha={datosDelDia.fecha}
+            explicacion={datosDelDia.explicacion}
+            tipoContenido={datosDelDia.tipoContenido}
+            titulo={datosDelDia.titulo}
+            url={datosDelDia.url}
+          />
+        </div>
+      </div>
+    </div>
   );
 }
